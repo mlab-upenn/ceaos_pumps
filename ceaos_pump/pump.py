@@ -16,13 +16,13 @@ class Pump():
             if pin.is_integer() and pin > 0 and pin <= 26:
                 self.pin = pin
                 GPIO.setup(pin, GPIO.OUT)
-                GPIO.output(pin, GPIO.LOW)
+                GPIO.output(pin, GPIO.HIGH)
         except ValueError:
             print("Must be a valid integer")
 
-    def dispense(self, t):
+    def do(self, t):
         if self.pin is not None:
-            GPIO.output(self.pin, GPIO.HIGH)
+            GPIO.output(self.pin, GPIO.LOW)
             time.sleep(t)
             GPIO.output(self.pin, GPIO.LOW)
         else:
