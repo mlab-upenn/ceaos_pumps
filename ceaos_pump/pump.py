@@ -5,6 +5,7 @@ class Pump():
     def __init__(self):
         self.name = None
         self.pin = None
+        GPIO.setmode(BCM)
 
     
     def set_name(self, name):
@@ -13,7 +14,7 @@ class Pump():
     def set_pin(self, pin):
         try: 
             float(pin)
-            if pin.is_integer() and pin > 0 and pin <= 26:
+            if pin.is_integer() and pin > 0 and pin <= 27:
                 self.pin = pin
                 GPIO.setup(pin, GPIO.OUT)
                 GPIO.output(pin, GPIO.HIGH)
@@ -24,7 +25,7 @@ class Pump():
         if self.pin is not None:
             GPIO.output(self.pin, GPIO.LOW)
             time.sleep(t)
-            GPIO.output(self.pin, GPIO.LOW)
+            GPIO.output(self.pin, GPIO.HIGH)
         else:
             print("Must set GPIO pin for %s" % self.name)
 
